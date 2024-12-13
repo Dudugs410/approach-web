@@ -1,6 +1,8 @@
 import React, { useEffect } from "react"
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import Login from '../pages/Login'
+import Private from "./Private"
+import Dashboard from "../pages/Dashboard"
 
 function RoutesApp() {
   const location = useLocation()
@@ -10,7 +12,7 @@ function RoutesApp() {
     if(location.pathname !== '/'){
       localStorage.setItem('currentPath', location.pathname)
     } else {
-      if(localStorage.getItem('isSignedIn') && localStorage.getItem('isSignedIn') === true){
+      if(localStorage.getItem('isLoggedIn') && localStorage.getItem('isLoggedIn') === true){
         localStorage.setItem('currentPath', '/dashboard')
       }
     }
@@ -31,6 +33,7 @@ function RoutesApp() {
   return (
     <Routes>
       <Route path='/' element={<Login />} />
+      <Route path='/dashboard' element={<Private><Dashboard /></Private>}/>
     </Routes>
   )
 }

@@ -40,6 +40,11 @@
     border: solid orange 1px;
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.5);
+
+}
+
+.form-control{
+    text-align: center;
 }
 
 .form-login:hover{
