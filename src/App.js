@@ -1,9 +1,9 @@
+import 'bootstrap/dist/css/bootstrap.min.css'
 import AuthProvider from './contexts/auth'
 import { BrowserRouter } from 'react-router-dom'
 import RoutesApp from './routes'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
-
 import './index.scss'
 
 function App() {

@@ -1,107 +1,59 @@
-
-
-.teste-bandeiras{
-    border: solid red 2px;
-    width: 100%;
-    height: 100%;
+.body-login {
+    height: 100%; /* Full height to use parent's height */
+    width: 100%;  /* Full width to use parent's width */
+    display: flex; 
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;     /* Centers content vertically */
+    flex-direction: column;  /* Optional, based on your layout */
+    overflow: hidden; /* Ensures pseudo-element doesn't overflow */
 }
 
-
-.body-login{
+.background-image{
+    position: absolute;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    background-image: url("../../assets/background-login.jpg");
     background-size: cover;
-    background-repeat: no-repeat;
-    justify-content: center;
-    border-radius: 4px;
-    background-color: rgb(25, 25, 46);
-    /*background-image: url("../../assets/background.png");*/
+    background-position: center;
+    background-blend-mode: multiply;
+    opacity: 0.4;
 }
 
-.form-login>h1{
-    color:white;
-    margin-top: 80%;
+.img-form{
+    width: 100%;
 }
 
 .form-login{
-    color: rgb(255, 255, 255);
-    height: 100%;
+    z-index: 1;
+    height: 40%;
+    width: 30%;
+    min-width: 260px;
+    max-width: 400px;
+    min-height: fit-content;
+    padding: 3%;
     display: flex;
-    flex-direction: column;
-    cursor: default;
-    justify-content:center;
+    flex-direction: column; /* Optional, depending on your layout */
+    align-items: center;    /* Horizontally center */
+    justify-content: flex-start;
+    border: solid orange 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .form-login:hover{
-    cursor:default;
-}
-
-.titulo-Login{
-    margin-top: 80%;
+    cursor: auto;
 }
 
 .input-container-login{
-    width: 70%;
-    border-radius: 10px;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    padding: 40px;
+    gap: 10px;
 }
 
-.input-login{
-    border-radius: 8px;
-    padding: 4px;
-    text-align: center;
-    
+.btn-login{
+    background-color: orange;
 }
 
-.input-login:not(:first-child){
-    margin-top: 10px;
-}
-
-.pw{
-    font-size: 0.8em;
-    color: rgb(190, 190, 190);
-    text-align: center;
-    text-decoration: none;
-}
-
-.pw:hover{
-    text-decoration: underline;
-}
-
-.img-container{
-    position: relative;
-    z-index: 1;
-    width: 100%;
-    height: 100%;
-}
-
-.form-login>img{
-    width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
-}
-
-.form-login{
-    align-items: center;
-    display: flex;
-}
-
-.img-login{
-    display: flex;
-    justify-content: center;
-    width: 300px;
-    height: 80px;
-
-}
-
-@media (max-width: 500px) {
-    .img-login {
-      width: 120px;
-      height: 40px;
-    }
-  }
