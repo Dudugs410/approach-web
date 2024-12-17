@@ -6,9 +6,6 @@ function Layout({ children }) {
   return (
     <div className='layout'>
       <div className='layout-content'>
-        <div className='sidebar-content'>
-          <SidebarMenu />
-        </div>
         <div className='column-container'>
           {children}
         </div>

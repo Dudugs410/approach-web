@@ -21,7 +21,7 @@
 
 .nav-link {
     border-bottom: solid #888888 1px;
-    color: var(--table-row-hover-bg);
+    color: var(--background-color);
 }
 
 .nav-link:focus, .nav-link:hover {
@@ -38,7 +38,7 @@
 
     &.active-parent {
         background-color: var(--secondary-color);
-        color: white;
+        color: --background-color;
     }
     
     &:hover {
@@ -67,7 +67,7 @@
 
 .navlink-parent:hover{
     background-color: var(--secondary-color);
-    color: var(--table-row-hover-bg)
+    color: var(--background-color)
 }
 
 .navbar-expand-md .navbar-nav .nav-link {
@@ -79,25 +79,25 @@
 /* Parent hover and active styles */
 .navlink-parent:hover, 
 .navlink-parent.active-parent {
-    background-color: var(--secondary-color);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--background-color);
 }
 
 /* Child hover and active styles */
 .navlink-child:hover,
 .navlink-child.active-child {
-    background-color: var(--secondary-color);
-    color: var(--sidebar-font-color);
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
     opacity: 0.8;
 }
 
 .navlink-child:hover{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }
 
 .bg-sidebar{
     height: 100%;
-    border-right: solid var(--secondary-color) 1px;
+    border-right: solid var(--primary-color) 1px;
 }
 
 ul{
@@ -137,7 +137,7 @@ ul{
         background-repeat: no-repeat;
         background-size: cover;
         background-blend-mode: multiply;
-        background-color: var(--header-bg);
+        background-color: var(--background-color);
         &.visible {
             transform: translateX(0);
         }
@@ -158,11 +158,11 @@ ul{
     @media (max-width: 946px) {
         display: block;
         border: solid var(--secondary-color) 1px;
-        background-color: var(--primary-color);
+        background-color: var(--background-color);
 
     }
 }
 
 .sidebar-content>button:hover{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
 }

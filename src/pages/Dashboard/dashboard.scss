@@ -1,0 +1,28 @@
+
+.img-dashboard-container{
+    z-index: 1;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    display: flex
+;
+    justify-content: center;
+}
+
+.img-dashboard{
+    height: 400px;
+    width: 500px;
+}
+
+.dashboard-container{
+    height: 100%;
+    width: 100%;
+}
+
+.dashboard-card-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 5px;
+    margin: 5px;
+}

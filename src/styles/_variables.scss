@@ -1,33 +1,29 @@
 
 :root {
     /* Current Theme Colors */
-    --primary-color: rgb(10, 61, 112);        
-    --secondary-color: rgb(153, 204, 51);
-    --background-color: #fff;
-    --font-color: rgb(10, 61, 112);
-    --header-text-color: white;
-
-    //total Modalidades
-    --modalidades-border: rgb(10, 61, 112);
+    --primary-color: #FFDE59;        
+    --secondary-color: #FFFFFF;
+    --background-color: #202041;
+    --font-color: #FFDE59;
 
     //Table
-    --table-background: white;
-    --table-row-hover-color: #99cc33;
-    --table-row-hover-bg: rgb(10, 61, 112);
+    --table-background: #202041;
+    --table-row-hover-color: #FFFFFF;
+    --table-row-hover-bg: #FFDE59;
 
     //header
-    --header-bg: rgba(10,61,112,0.945);
+    --header-bg: #FFDE59;
 
     //calendar
-    --calendar-cell-color: rgb(10, 61, 112);
-    --calendar-now-color: rgb(153, 204, 51);
+    --calendar-cell-color: #FFDE59;
+    --calendar-now-color: #FFFFFF;
     --calendar-neighbor-color: #757575;
-    --calendar-btn-navigation-color: #0a3d70;
+    --calendar-btn-navigation-color: #FFDE59;
     --calendar-neighbor-bg: rgb(187, 187, 187);
 
     //outros
-    --sidebar-font-color: white;
-    --subtitle-color: rgb(10, 61, 112);
+    --sidebar-font-color: #FFDE59;
+    --subtitle-color: #FFDE59;
 
     //-----------------------------------------------------------------//
 

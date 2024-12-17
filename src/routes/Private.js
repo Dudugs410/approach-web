@@ -8,14 +8,16 @@ export default function Private({ children }) {
 
   const navigate = useNavigate()
 
+  const logged = JSON.parse(localStorage.getItem('isLoggedIn'))
+
   useEffect(()=>{
-    console.log('is Logged in? ', localStorage.getItem('isLoggedIn'))
-    if(localStorage.getItem('isLoggedIn') !== true){
+    console.log('is Logged in? ', logged)
+    if(logged !== true){
       navigate('/')
     }
   },[])
 
-  if (localStorage.getItem('isLoggedIn') === true) {
+  if (logged) {
     return (
       <>
         <Layout>{children}</Layout>

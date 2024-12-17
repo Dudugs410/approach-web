@@ -28,6 +28,7 @@ function AuthProvider({ children }){
 				localStorage.setItem('isLoggedIn', true)
 				localStorage.setItem('currentPath', '/dashboard')
 				setIsLoggedIn(true)
+				navigate('/dashboard')
 			}
 			await log()
 		

@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Sidebar.scss';
-import logoApproach from '../../assets/background-login.jpg';
+import logoApproach from '../../assets/approach-login.png';
 import { Collapse, Nav, Navbar, NavItem, NavLink, Button } from 'reactstrap';
 import { AuthContext } from '../../contexts/auth';
-import { FiMenu } from 'react-icons/fi'; // Import the menu icon
+import { FiMenu, FiHome } from 'react-icons/fi'; // Import the menu icon
 import { useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -56,24 +56,10 @@ const Sidebar = () => {
     useEffect(() => {
         const icones = {
             'FiHome': FiHome,
-            'FiDollarSign': FiDollarSign,
-            'FiCreditCard': FiCreditCard,
-            'FiTool': FiTool,
-            'FiLink': FiLink,
-            'FiFileText': FiFileText,
-            'FiDownload': FiDownload,
-            'FiPaperClip': FiPaperclip,
-            'FiSettings': FiSettings,
-            'FiTruck': FiTruck,
-            'FiShoppingBag': FiShoppingBag,
-            'FiTable': FiTable,
         };
 
         const orderedOptions = [
             { nome: 'Início', icone: icones['FiHome'], rota: '/dashboard' },
-            { nome: 'Vendas', icone: icones['FiDollarSign'], rota: '/vendas' },
-            { nome: 'Créditos', icone: icones['FiCreditCard'], rota: '/creditos' },
-            { nome: 'Serviços', icone: icones['FiTool'], rota: '/servicos' },
         ];
 
         setOptionsWithIcons(orderedOptions);
@@ -125,30 +111,3 @@ const Sidebar = () => {
 }
 
 export default Sidebar;
-
-/*
-    { nome: 'Bancos', icone: icones['FiLink'], rota: '/cadastrodebancos' },
-    { nome: 'Taxas', icone: icones['FiTable'], rota: '/taxas' },
-    { 
-        nome: 'Relatórios', 
-        icone: icones['FiFileText'], 
-        children: [
-            { nome: 'Financeiro', rota: '/financeiro' },
-            { nome: 'Gerenciais', rota: '/gerenciais' },
-            { nome: 'Outros', rota: '/outrosrelatorios' },
-        ] 
-    },
-    { 
-        nome: 'Exportações', 
-        icone: icones['FiDownload'], 
-        children: [
-            { nome: 'Sysmo', rota: '/sysmo' },
-            { nome: 'Meta', rota: '/meta' },
-            { nome: 'Meta Sapiranga', rota: '/metasapiranga' },
-        ] 
-    },
-    { nome: 'Administração', icone: icones['FiPaperClip'], rota: '/administracao' },
-    { nome: 'Suporte', icone: icones['FiSettings'], rota: '/suporte' },
-    { nome: 'Delivery', icone: icones['FiTruck'], rota: '/vendasdelivery' },
-    { nome: 'Conciliação', icone: icones['FiShoppingBag'], rota: '/conciliacao' },
-*/
