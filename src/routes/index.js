@@ -1,8 +1,8 @@
 import React, { useEffect } from "react"
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
-import Login from '../pages/Login'
+import Login from '../pages/00 - Login'
+import Dashboard from "../pages/02 - Dashboard"
 import Private from "./Private"
-import Dashboard from "../pages/Dashboard"
 
 function RoutesApp() {
   const location = useLocation()

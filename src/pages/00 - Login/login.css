@@ -1,0 +1,160 @@
+.body-login {
+    height: 100%; /* Full height to use parent's height */
+    width: 100%;  /* Full width to use parent's width */
+    display: flex; 
+    justify-content: center; /* Centers content horizontally */
+    align-items: center;     /* Centers content vertically */
+    flex-direction: column;  /* Optional, based on your layout */
+    overflow: hidden; /* Ensures pseudo-element doesn't overflow */
+    position: relative; /* To allow absolute positioning of the forms */
+}
+
+.background-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("../../assets/background-login.jpg");
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: multiply;
+    opacity: 0.4;
+}
+
+.img-form{
+    width: 100%;
+}
+
+.form-login {
+    z-index: 1;
+    height: 40%;
+    width: 30%;
+    min-width: 260px;
+    max-width: 400px;
+    min-height: fit-content;
+    padding: 3%;
+    display: flex;
+    flex-direction: column; /* Optional, depending on your layout */
+    align-items: center;    /* Horizontally center */
+    justify-content: flex-start;
+    border: solid orange 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: transform 1s ease-in-out; /* Add transition for sliding */
+}
+
+.form-login.slide-out {
+    transform: translateX(-100%); /* Slide out to the left */
+}
+
+.form-signup-container {
+    position: absolute;
+    top: 0;
+    left: 100%; /* Start from the right side */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: transform 0.5s ease-in-out;
+    z-index: 2; /* Ensures the sign-up form is above the login form */
+}
+
+.form-signup-container.show {
+    transform: translateX(-100%); /* Slide in from the right */
+}
+
+.signup-container{
+    z-index: 1;
+    height: 40%;
+    width: 40%;
+    min-width: 260px;
+    max-width: 400px;
+    min-height: fit-content;
+    padding: 3%;
+    display: flex;
+    flex-direction: column; /* Optional, depending on your layout */
+    align-items: center;    /* Horizontally center */
+    justify-content: flex-start;
+    border: solid orange 1px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.h2-signup{
+    color: var(--primary-color);
+}
+
+.form-control{
+    text-align: center;
+}
+
+.form-login:hover{
+    cursor: auto;
+}
+
+.input-container-login{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.login-btn-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    p{
+        font-size: .8em;
+        color: gray;
+        transition: all .4s;
+        &:hover{
+            cursor: pointer;
+            text-decoration: underline;
+            color: var(--primary-color);
+        }
+    }
+}
+
+.btn-login{
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: solid orange 1px;
+    transition: all 0.4s;
+    &:hover{
+        background-color: rgba(0, 0, 0, 0);
+        border: solid var(--primary-color) 1px;
+        color: var(--primary-color);
+    }
+}
+
+.btn-signup-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form-login {
+    position: relative;
+    width: 100%;
+    transition: transform 1s;
+}
+
+.form-login.slide-out {
+    transform: translateX(-500%); /* Slide out to the left */
+}
+
+.form-signup-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateX(500%); /* Start from the right side */
+    transition: transform 1s;
+}
+
+.form-signup-container.show {
+    transform: translateX(00%); /* Slide in to the original position */
+}

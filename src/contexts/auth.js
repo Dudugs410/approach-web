@@ -41,13 +41,14 @@ function AuthProvider({ children }){
 	function logout(){
 		localStorage.clear()
 		setIsLoggedIn(false)
+		setUserType(null)
 		navigate('/')
 	}
 
 	return(
 		<AuthContext.Provider
 			value={{
-				login, logout,
+				login, logout, userType,
 				isLoggedIn, setIsLoggedIn,
 			}}
 		>

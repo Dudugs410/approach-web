@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './carousel.scss'; // Import the SCSS file
 
-const ImageCarousel = ({ images, interval = 3000 }) => {
+const ImageCarousel = ({ images, interval = 2500 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {

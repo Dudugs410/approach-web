@@ -1,11 +1,21 @@
+.logout-btn-container{
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.btn-logout{
+    margin: 5px 5px 0 0;
+}
 
 .img-dashboard-container{
     z-index: 1;
     position: fixed;
     top: 0px;
     width: 100%;
-    display: flex
-;
+    display: flex;
     justify-content: center;
 }
 
@@ -23,6 +33,4 @@
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 5px;
-    margin: 5px;
 }

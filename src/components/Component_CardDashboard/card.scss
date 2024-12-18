@@ -1,12 +1,14 @@
 @import '../../styles/variables';
 
 .card-container {
-    width: 300px; // Adjust as needed
+    width: 100%;
     border-radius: 8px;
     border: solid gray 1px;
     background: rgba(0, 0, 0, 0.4);
     overflow: hidden;
     text-align: center;
+    margin-top: 5px;
+
   
     // Image Container
     .image-container {
@@ -53,23 +55,32 @@
         color: var(--font-color);
         margin: 8px 0;
     }
-  }
+}
 
-  .card-container:hover{
+.card-container:hover{
     cursor: pointer;
     border: solid var(--primary-color) 1px;
     border-radius: 5px;
     transition: all .4s;
-    
+
     &:hover {
         .card-img {
-          transform: scale(1.1); // Zoom image
+            transform: scale(1.1); // Zoom image
         }
-  
+
         .image-overlay {
-          opacity: 1; // Show overlay
+            opacity: 1; // Show overlay
         }
     }
 
-  }
+}
+
+.card-container:first-child{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.card-container:last-child{
+    margin-right: 5px;
+}
   
