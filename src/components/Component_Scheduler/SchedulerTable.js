@@ -77,14 +77,14 @@ const SchedulerTable = ({array}) =>{
 			{array.length > itemsPerPage && (
 				<div className="container-btn-pagina">
 					<button
-						className='btn btn-primary btn-global btn-skip'
+						className='btn btn-primary btn-global btn-skip btn-schedule-table'
 						onClick={goToFirstPage}
 						disabled={currentPage === 1} // Disable if already on the first page
 					>
 						<FiSkipBack />
 					</button>
 					<button
-						className='btn btn-primary btn-global btn-navigate'
+						className='btn btn-primary btn-global btn-navigate btn-schedule-table'
 						onClick={goToPrevPage}
 						disabled={currentPage === 1} // Disable if it's the first page
 					>
@@ -95,14 +95,14 @@ const SchedulerTable = ({array}) =>{
 						<span className='texto-paginacao'>{currentPage}</span>
 					</div>
 					<button
-						className='btn btn-primary btn-global btn-navigate'
+						className='btn btn-primary btn-global btn-navigate btn-schedule-table'
 						onClick={goToNextPage}
 						disabled={currentPage === Math.ceil(array.length / itemsPerPage)} // Disable if it's the last page
 					>
 						<FiChevronRight/> {/* Right arrow */}
 					</button>
 					<button
-						className='btn btn-primary btn-global btn-skip'
+						className='btn btn-primary btn-global btn-skip btn-schedule-table'
 						onClick={goToLastPage}
 						disabled={currentPage === Math.ceil(array.length / itemsPerPage)} // Disable if already on the last page
 					>
