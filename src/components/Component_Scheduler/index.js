@@ -5,26 +5,27 @@ import "./scheduler.scss"; // Custom styling
 import SchedulerTable from "./SchedulerTable";
 
 const Scheduler = () => {
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [selectedTime, setSelectedTime] = useState(null);
-  const [bookings, setBookings] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null)
+  const [selectedTime, setSelectedTime] = useState(null)
+  const [selectedLocal, setSelectedLocal] = useState(null)
+  const [bookings, setBookings] = useState([])
 
   const handleBooking = () => {
     if (!selectedDate || !selectedTime) {
-      alert("Você deve selecionar uma Data e Horário");
-      return;
+      alert("Você deve selecionar uma Data e Horário")
+      return
     }
 
     const newBooking = {
       date: selectedDate.toLocaleDateString('pt-BR'),
       time: selectedTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-      local: 'GNU'
-    };
+      local: selectedLocal
+    }
 
-    setBookings((prevBookings) => [...prevBookings, newBooking]);
-    setSelectedDate(null);
-    setSelectedTime(null);
-  };
+    setBookings((prevBookings) => [...prevBookings, newBooking])
+    setSelectedDate(null)
+    setSelectedTime(null)
+  }
 
   useEffect(()=>{
     let temp = JSON.parse(localStorage.getItem('bookings'))
@@ -36,6 +37,11 @@ const Scheduler = () => {
   useEffect(()=>{
     localStorage.setItem('bookings', JSON.stringify(bookings))
   },[bookings])
+
+  useEffect(()=>{
+    console.log('local: ', selectedLocal)
+
+  },[selectedLocal])
 
   return (
     <div className="scheduler">
@@ -65,6 +71,17 @@ const Scheduler = () => {
             placeholderText="horário"
             className="form-control"
           />
+        </div>
+        <div className='picker-group'>
+          <label>Selecione o Local:</label>
+          <select
+            selected={selectedLocal}
+            onChange={(selected) => setSelectedLocal(selected.target.value)}
+            className="form-select"
+          >
+              <option selected value='GNU'>Gremio Nautico União</option>
+              <option value="Outro">Outro</option>
+          </select>
         </div>
       </div>
 

@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react'
 import { FiChevronLeft, FiChevronRight, FiSkipBack, FiSkipForward } from 'react-icons/fi'
 
+import './schedulerTable.scss'
 
 const SchedulerTable = ({array}) =>{
 
