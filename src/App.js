@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 import AuthProvider from './contexts/auth'
 import { BrowserRouter } from 'react-router-dom'
 import RoutesApp from './routes'

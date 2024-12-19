@@ -17,9 +17,11 @@ function AuthProvider({ children }){
 			const log = async () => {
 				if(user === 'atleta'){
 					setUserType('atleta')
+					localStorage.setItem('userType', 'atleta')
 					console.log('loggou como atleta')
 				} else if (user === 'cliente'){
 					setUserType('cliente')
+					localStorage.setItem('userType', 'cliente')
 					console.log('loggou como cliente')
 				} else {
 					console.log('usuario invalido.(// atleta // ou // cliente //)')
@@ -28,6 +30,7 @@ function AuthProvider({ children }){
 				localStorage.setItem('isLoggedIn', true)
 				localStorage.setItem('currentPath', '/dashboard')
 				setIsLoggedIn(true)
+				navigate('/dashboard')
 			}
 			await log()
 		
@@ -40,13 +43,14 @@ function AuthProvider({ children }){
 	function logout(){
 		localStorage.clear()
 		setIsLoggedIn(false)
+		setUserType(null)
 		navigate('/')
 	}
 
 	return(
 		<AuthContext.Provider
 			value={{
-				login, logout,
+				login, logout, userType, setUserType,
 				isLoggedIn, setIsLoggedIn,
 			}}
 		>

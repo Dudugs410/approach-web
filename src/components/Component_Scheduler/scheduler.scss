@@ -1,0 +1,95 @@
+.scheduler {
+  //max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #1a2a44;
+  color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  .booking-form {
+    .form-item {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      
+      label {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+
+      .date-picker,
+      .time-picker {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+        margin-top: 5px;
+        z-index: 999;
+      }
+    }
+
+    .submit-btn {
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+
+      &:hover {
+        background-color: #45a049;
+      }
+    }
+  }
+
+  .booking-list {
+    margin-top: 20px;
+
+    ul {
+      list-style: none;
+      padding: 0;
+
+      li {
+        margin-bottom: 10px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+.picker-container {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+
+.picker-group{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.reserve-btn {
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
