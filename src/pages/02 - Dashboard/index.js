@@ -3,7 +3,7 @@
 /* eslint-disable default-case */
 
 import { useContext, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import logo from '../../assets/approach.png'
 import img01 from '../../assets/01.webp'
@@ -23,20 +23,19 @@ import './dashboard.scss'
 import { AuthContext } from '../../contexts/auth'
 
 const Dashboard = () => {
-	const location = useLocation()
-	const { userType, logout } = useContext(AuthContext)
+	const navigate = useNavigate()
+	const { logout } = useContext(AuthContext)
 
 	const images = [
 		img01, img02, img03, img04
 	  ];
+
+	const [userType, setUserType] = useState(null)
 	
 	useEffect(()=>{
-		console.log('userType: ', userType)
+		setUserType(localStorage.getItem('userType'))
 	},[])
 
-	useEffect(() => {
-		localStorage.setItem('currentPath', location.pathname)
-	}, [location])
 
 	const handleSair = () =>{
 		logout()
@@ -62,13 +61,13 @@ const Dashboard = () => {
 				<ImageCarousel images={images} interval={7000} />
 				{ userType === 'atleta' ? 
 					<div className='dashboard-card-container'>
-						<Card title={'Agendamentos'} p={'Visualize seus agendamentos'} image={agendamento} />
-						<Card title={'Quadras'} p={'Encontre quadras disponíveis'} image={quadras} />
+						<Card title={'Agendamentos'} p={'Visualize seus agendamentos'} image={agendamento} onClick={()=>{navigate('/agenda')}}/>
+						<Card title={'Quadras'} p={'Encontre quadras disponíveis'} image={quadras} onClick={()=>{navigate('/encontrequadras')}}/>
 					</div>
 					:
 					<div className='dashboard-card-container'>
-						<Card title={'Agendamentos'} p={'Visualize e gerencie agendamentos'} image={agendamentoCliente} />
-						<Card title={'Gerenciar Quadras'} p={'Gerencie suas quadras'} image={quadrasCliente} />
+						<Card title={'Agendamentos'} p={'Visualize e gerencie agendamentos'} image={agendamentoCliente} onClick={()=>{navigate('/agendamentos')}}/>
+						<Card title={'Gerenciar Quadras'} p={'Gerencie suas quadras'} image={quadrasCliente} onClick={()=>{navigate('/gerenciarquadras')}}/>
 					</div>
 				}
 			</div>

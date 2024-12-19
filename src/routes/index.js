@@ -3,6 +3,7 @@ import { Route, Routes, useLocation, useNavigate } from "react-router-dom"
 import Login from '../pages/00 - Login'
 import Dashboard from "../pages/02 - Dashboard"
 import Private from "./Private"
+import Agenda from "../pages/03 - Agenda"
 
 function RoutesApp() {
   const location = useLocation()
@@ -34,6 +35,10 @@ function RoutesApp() {
     <Routes>
       <Route path='/' element={<Login />} />
       <Route path='/dashboard' element={<Private><Dashboard /></Private>}/>
+      <Route path='/agenda' element={<Private><Agenda/></Private>}/>
+      <Route path='/encontrequadras' element={<Private></Private>}/>
+      <Route path='/agendamentos' element={<Private></Private>}/>
+      <Route path='/gerenciarquadras' element={<Private></Private>}/>
     </Routes>
   )
 }

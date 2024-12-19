@@ -1,8 +1,8 @@
 import './card.scss';
 
-const Card = ({ image, title, p }) => {
+const Card = ({ image, title, p, onClick }) => {
   return (
-    <div className="card-container">
+    <div className="card-container" onClick={onClick}>
       <div className="image-container">
         <img className="card-img" src={image} alt="card" />
         <div className="image-overlay"></div>

@@ -1,6 +1,5 @@
 import '../../styles/global.scss'
 import './layout.scss'
-import SidebarMenu from '../Componente_SidebarMenu'
 
 function Layout({ children }) {
   return (
