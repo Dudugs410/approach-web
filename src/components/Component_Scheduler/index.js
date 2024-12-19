@@ -1,13 +1,22 @@
-import React, { useEffect, useState } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import "./scheduler.scss"; // Custom styling
-import SchedulerTable from "./SchedulerTable";
+import React, { useEffect, useRef, useState } from "react"
+import DatePicker from "react-datepicker"
+import "react-datepicker/dist/react-datepicker.css"
+import "./scheduler.scss" // Custom styling
+import SchedulerTable from "./SchedulerTable"
 
 const Scheduler = () => {
   const [selectedDate, setSelectedDate] = useState(null)
   const [selectedTime, setSelectedTime] = useState(null)
   const [selectedLocal, setSelectedLocal] = useState(null)
+  const selectRef = useRef(null);
+
+  useEffect(() => {
+    // Set the first option as the default value dynamically
+    if (selectRef.current) {
+      setSelectedLocal(selectRef.current.options[0].value);
+    }
+  }, []);
+
   const [bookings, setBookings] = useState([])
 
   const handleBooking = () => {
@@ -75,12 +84,13 @@ const Scheduler = () => {
         <div className='picker-group'>
           <label>Selecione o Local:</label>
           <select
-            selected={selectedLocal}
-            onChange={(selected) => setSelectedLocal(selected.target.value)}
+            ref={selectRef}
+            value={selectedLocal}
+            onChange={(e) => setSelectedLocal(e.target.value)}
             className="form-select"
           >
-              <option selected value='GNU'>Gremio Nautico União</option>
-              <option value="Outro">Outro</option>
+            <option value="GNU">Gremio Nautico União</option>
+            <option value="Outro">Outro</option>
           </select>
         </div>
       </div>
