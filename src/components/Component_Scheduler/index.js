@@ -55,7 +55,6 @@ const Scheduler = () => {
   return (
     <div className="scheduler">
       <h1>Reserva de Quadras</h1>
-
       <div className="picker-container">
         <div className='picker-group'>
           <label>Selecione a Data:</label>

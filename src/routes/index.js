@@ -4,6 +4,7 @@ import Login from '../pages/00 - Login'
 import Dashboard from "../pages/02 - Dashboard"
 import Private from "./Private"
 import Agenda from "../pages/03 - Agenda"
+import EncontreQuadras from "../pages/04 - QuadrasDisponiveis"
 
 function RoutesApp() {
   const location = useLocation()
@@ -36,7 +37,7 @@ function RoutesApp() {
       <Route path='/' element={<Login />} />
       <Route path='/dashboard' element={<Private><Dashboard /></Private>}/>
       <Route path='/agenda' element={<Private><Agenda/></Private>}/>
-      <Route path='/encontrequadras' element={<Private></Private>}/>
+      <Route path='/encontrequadras' element={<Private><EncontreQuadras/></Private>}/>
       <Route path='/agendamentos' element={<Private></Private>}/>
       <Route path='/gerenciarquadras' element={<Private></Private>}/>
     </Routes>
