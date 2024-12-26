@@ -3,11 +3,13 @@
     padding: 20px;
     width: 100%;
     border: solid white 1px;
-    position: relative; /* Needed for proper positioning of the background container */
+    border-radius: 10px;
+    position: relative; /* Enables layering with z-index */
+    z-index: 1; /* Ensure it appears above the parent's background */
     transition: all 0.4s;
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.5); /* Add hover effect */
         cursor: pointer;
     }
 
@@ -19,6 +21,7 @@
     & > .info-card {
         display: flex;
         flex-direction: column;
+        width: 100%;
         margin-left: 30px;
         gap: 5px;
     }
@@ -29,21 +32,27 @@
     }
 
     & > .bg-img-container {
-        position: absolute; /* Makes it overlay the entire container */
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
-        height: 100%; /* Matches the height of the entire container */
+        height: 100%;
         overflow: hidden;
-        z-index: -1; /* Places it behind the content */
+        z-index: -1; /* Keeps the background behind the card content */
 
         & > .bg-img {
             background-image: url('../../assets/quadrasCliente.jpg'); /* Replace with your actual path */
-            background-size: cover; /* Ensures the image covers the entire container */
+            background-size: cover;
             background-position: center;
             width: 100%;
             height: 100%;
-            opacity: 0.3; /* Transparency effect */
+            opacity: 0.3;
+            pointer-events: none; /* Prevent it from capturing mouse events */
         }
     }
+}
+
+.card-select-container{
+    display: inline-flex;
+    gap: 5px;
 }

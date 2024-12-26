@@ -1,6 +1,9 @@
 .container-quadras{
     border: solid white 1px;
+    border-radius: 10px;
     padding: 25px;
     margin-top: 3rem !important;
     margin-bottom: 3rem !important;
+    background-color: var(--background-color);
+    position: relative; /* Ensure layering works with child elements */
 }
