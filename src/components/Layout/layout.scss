@@ -1,62 +1,47 @@
 .layout {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-  
-  .layout-content {
-    display: flex;
-    flex: 1;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-  }
-
-  .navbar-title{
-    display: flex;
-    /* flex-direction: column; */
-    /* align-self: start; */
-    /* padding-left: 20px; */
-    /* padding-top: 15px; */
-    /* font-size: x-large; */
-    /* z-index: 1; */
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-wrap: wrap;
-    padding: 8px;
-    border-bottom: solid gray 1px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative;
 }
 
-.navbar-title>img{
-    width: 160px;
-}
+.background-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
 
-img.img-header:hover{
-    cursor: pointer !important;
-  }
-  
-  .sidebar-content {
-    flex-shrink: 0;
-    /*background-image: url("../../assets/financ.jpg");*/
-    background-repeat: no-repeat;
+  /* Using a pseudo-element to apply the background with opacity */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../../assets/quadras02.jpg");
     background-size: cover;
-    background-blend-mode: multiply;
-    /*background-color: var(--header-bg);*/
+    background-position: center;
+    opacity: 0.5; /* Only the background image has opacity */
+    z-index: -1;
   }
-  
-  .column-container {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-    overflow-y: auto; /* Allow vertical scroll */
-  }
-  
-  .children-content {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    overflow-y: auto; /* Allow vertical scroll */
-    width: 100%; /* Ensure full width is used */
-  }
-  
+}
+
+.layout-content {
+  display: flex;
+  flex: 1;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative;
+  z-index: 1; /* Ensure content is above the background */
+}
+
+.column-container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  overflow-y: auto; /* Allow vertical scroll */
+}
