@@ -15,36 +15,113 @@ function AuthProvider({ children }){
 	const login = async (user, pw) => {
 		try {
 			const log = async () => {
-				if(user === 'atleta'){
-					setUserType('atleta')
-					localStorage.setItem('userType', 'atleta')
-					console.log('loggou como atleta')
-				} else if (user === 'cliente'){
-					setUserType('cliente')
-					localStorage.setItem('userType', 'cliente')
-					console.log('loggou como cliente')
+				if (user !== 'cliente' || user === 'cliente') {
+					// Set user type and initialize currentUser
+					const userType = user !== 'cliente' ? 'atleta' : 'cliente';
+					setUserType(userType);
+					localStorage.setItem('userType', userType);
+	
+					let currentUser = {
+						usuario: user,
+						tipo: userType,
+						agendamentos: [],
+					};
+	
+					// Retrieve localUsers from localStorage or initialize it if not present
+					let localUsers = JSON.parse(localStorage.getItem('localUsers')) || [];
+	
+					// Check if the user already exists in localUsers
+					const existingUser = localUsers.find((u) => u.usuario === user);
+	
+					if (existingUser) {
+						// Load existing user data into currentUser
+						currentUser = existingUser;
+						console.log(`User ${user} loaded from localUsers`);
+					} else {
+						// Add currentUser to localUsers if it doesn't exist
+						localUsers.push(currentUser);
+						localStorage.setItem('localUsers', JSON.stringify(localUsers));
+						console.log(`New user ${user} added to localUsers`);
+					}
+	
+					// Save currentUser to localStorage
+					localStorage.setItem('currentUser', JSON.stringify(currentUser));
+	
+					console.log(`Logged in as ${userType}`);
 				} else {
-					console.log('usuario invalido.(// atleta // ou // cliente //)')
-					return
+					console.log('Invalid user type. Please use "atleta" or "cliente".');
+					return;
 				}
-				localStorage.setItem('isLoggedIn', true)
-				localStorage.setItem('currentPath', '/dashboard')
-				setIsLoggedIn(true)
-				navigate('/dashboard')
-			}
-			await log()
-		
+	
+				// Set login state and navigate
+				localStorage.setItem('isLoggedIn', true);
+				localStorage.setItem('currentPath', '/dashboard');
+	
+				setIsLoggedIn(true);
+				navigate('/dashboard');
+			};
+	
+			await log();
 		} catch (error) {
-			console.log('error: ', error)
+			console.log('Error during login: ', error);
 		}
+	};
 
+
+	function updateUser(user) {
+		// Save the updated user as the currentUser
+		let currentUser = user;
+		localStorage.setItem('currentUser', JSON.stringify(currentUser));
+	
+		// Retrieve the list of localUsers from localStorage or initialize it if not present
+		let localUsers = JSON.parse(localStorage.getItem('localUsers')) || [];
+	
+		// Debug: Log current user and localUsers array
+		console.log('Current User:', currentUser);
+		console.log('Local Users (Before):', localUsers);
+	
+		// Find the index of the existing user in the localUsers array
+		const existingUserIndex = localUsers.findIndex((u) => u.usuario === user.usuario);
+	
+		if (existingUserIndex !== -1) {
+			// Replace the existing user with the updated user
+			localUsers[existingUserIndex] = { ...localUsers[existingUserIndex], ...currentUser };
+			console.log(`Updated user: ${user.usuario}`);
+		} else {
+			// Add the new user to the array
+			localUsers.push(currentUser);
+			console.log(`Added new user: ${user.usuario}`);
+		}
+	
+		// Save the updated localUsers array back to localStorage
+		localStorage.setItem('localUsers', JSON.stringify(localUsers));
+	
+		// Debug: Log updated localUsers array
+		console.log('Local Users (After):', localUsers);
 	}
-
+	
 	function logout(){
+		let localUsers = []
+		localUsers = JSON.parse(localStorage.getItem('localUsers'))
 		localStorage.clear()
 		setIsLoggedIn(false)
 		setUserType(null)
+		localStorage.setItem('localUsers', JSON.stringify(localUsers))
 		navigate('/')
+	}
+
+	const schedule = (place, date) => {
+		let agendamento = {
+			local: place.nome,
+			data: date.toLocaleDateString('pt-BR'),
+			hora: date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
+			endereco: place.endereco,
+		}
+
+		let currentUser = JSON.parse(localStorage.getItem('currentUser'))
+		currentUser.agendamentos.push(agendamento)
+
+		localStorage.setItem('currentUser', JSON.stringify(currentUser))
 	}
 
 	return(
@@ -52,6 +129,7 @@ function AuthProvider({ children }){
 			value={{
 				login, logout, userType, setUserType,
 				isLoggedIn, setIsLoggedIn,
+				schedule, updateUser,
 			}}
 		>
 			{children}
