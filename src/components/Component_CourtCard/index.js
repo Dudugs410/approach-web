@@ -1,20 +1,36 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './courtCard.scss';
+import { AuthContext } from '../../contexts/auth';
 
 const CourtCard = ({ court }) => {
-  const [selectedDay, setSelectedDay] = useState(null); // Track the selected day
-  const [selectedHorario, setSelectedHorario] = useState(''); // Track selected horario
+  const { schedule, updateUser } = useContext(AuthContext)
 
-  const horarios = court.horarios;
+  const [selectedDate, setSelectedDate] = useState(''); // Track the selected date
+  const [selectedTime, setSelectedTime] = useState(''); // Track selected time slot
 
-  const handleDayChange = (e) => {
-    const day = e.target.value;
-    setSelectedDay(day); // Set the selected day
+  const handleDateChange = (e) => {
+    setSelectedDate(e.target.value); // Set the selected date
+    setSelectedTime(''); // Reset selected time when date changes
   };
 
   const handleHorarioChange = (e) => {
-    const horario = e.target.value;
-    setSelectedHorario(horario); // Set the selected horario
+    setSelectedTime(e.target.value); // Set the selected time
+  };
+
+  const handleSubmit = () => {
+    if (!selectedDate || !selectedTime) {
+      alert('Please select both a date and time.');
+      return;
+    }
+
+    // Combine the date and time into a Date object
+    const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+
+    // Call the schedule function with place and dateTime
+    schedule(court, dateTime);
+    let user = JSON.parse(localStorage.getItem('currentUser'))
+    updateUser(user)
+    alert('Agendamento realizado com sucesso!');
   };
 
   return (
@@ -25,42 +41,34 @@ const CourtCard = ({ court }) => {
         <p><b>Horário de Funcionamento: </b>&nbsp;{court.horarioFuncionamento}</p>
         <p><b>Endereço: </b>&nbsp;{court.endereco}</p>
         <div className="card-select-container">
-          {/* Day select */}
-          <select
-            className="form-select"
+         {/* Date Picker */}
+         <input
+            type="date"
+            className="form-select date-time-controller"
             aria-label="Dia select"
-            onChange={handleDayChange}
-            value={selectedDay || ''}
-          >
-            <option selected disabled>Dia</option>
-            {horarios.map((horario, dayIndex) => (
-              <option key={dayIndex} value={horario.day}>
-                {horario.day}
-              </option>
-            ))}
-          </select>
+            onChange={handleDateChange}
+            value={selectedDate}
+            style={{ flex: 1 }}
+          />
 
-          {/* Horário select - disabled until a day is selected */}
-          <select
-            className="form-select"
+          {/* Time Picker - Disabled until a date is selected */}
+          <input
+            type="time"
+            className="form-control date-time-controller"
             aria-label="Horário select"
             onChange={handleHorarioChange}
-            value={selectedHorario}
-            disabled={!selectedDay} // Disable if no day is selected
-          >
-            <option selected disabled>Horário</option>
-            {/* Show only the horarios for the selected day */}
-            {selectedDay &&
-              horarios
-                .filter((horario) => horario.day === parseInt(selectedDay)) // Filter by selected day
-                .flatMap((horario) =>
-                  horario.horarios.map((timeSlot, timeIndex) => (
-                    <option key={`${timeIndex}`} value={timeSlot.horario} disabled={timeSlot.disponivel}>
-                      {timeSlot.horario}
-                    </option>
-                  ))
-                )}
-          </select>
+            value={selectedTime || ''}
+            disabled={!selectedDate}
+          />
+          <div className='btn-container'>
+            <button 
+              className='btn btn-agendar date-time-controller' 
+              disabled={!selectedTime || !selectedDate}
+              onClick={handleSubmit}
+              >
+                Agendar
+            </button>
+          </div>
         </div>
       </div>
       <div className="bg-img-container">

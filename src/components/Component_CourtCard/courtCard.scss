@@ -56,3 +56,18 @@
     display: inline-flex;
     gap: 5px;
 }
+
+.btn-agendar{
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    &:hover{
+        color: var(--primary-color);
+        border: solid var(--primary-color) 1px;
+        background-color: none;
+    }
+
+}
+
+.date-time-controller{
+    max-width: 300px !important;
+}
