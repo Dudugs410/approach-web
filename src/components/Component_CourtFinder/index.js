@@ -55,6 +55,10 @@ const CourtFinder = () => {
         setBookings(temp);
       }
     }, []);
+
+    useEffect(()=>{
+      console.log('quadras? ', bookings)
+    },[bookings])
   
     return (
       <div className="container mt-4 finder-container">

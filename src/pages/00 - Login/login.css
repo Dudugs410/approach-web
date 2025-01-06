@@ -89,6 +89,7 @@
 
 .form-control{
     text-align: center;
+    appearance: auto;
 }
 
 .form-login:hover{

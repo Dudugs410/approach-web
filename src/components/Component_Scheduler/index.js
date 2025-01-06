@@ -37,8 +37,11 @@ const Scheduler = () => {
   };
 
   const deleteBooking = (index) => {
+    const temp = JSON.parse(localStorage.getItem("currentUser"));
     console.log('btn deletar')
     const updatedBookings = bookings.filter((_, i) => i !== index);
+    temp.agendamentos = updatedBookings
+    localStorage.setItem('currentUser', JSON.stringify(temp))
     setBookings(updatedBookings);
   };
 
