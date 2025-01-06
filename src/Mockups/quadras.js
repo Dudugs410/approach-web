@@ -55,6 +55,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear), // Use reusable logic for horarios
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Rua dos Remadores, 123, Porto Alegre, RS',
+    precoHora: 'R$ 90,00',
   },
   {
     nome: 'Beach Sports',
@@ -65,6 +66,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear),
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Av. das Areias, 456, Florianópolis, SC',
+    precoHora: 'R$ 100,00',
   },
   {
     nome: 'Herold Tennis',
@@ -75,6 +77,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear),
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Rua dos Tenistas, 789, Curitiba, PR',
+    precoHora: 'R$ 70,00',
   },
   {
     nome: 'Três Figueiras Tênis Clube',
@@ -85,6 +88,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear),
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Rua Figueira, 321, Porto Alegre, RS',
+    precoHora: 'R$ 95,00',
   },
   {
     nome: 'Open Beach Floresta',
@@ -95,6 +99,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear),
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Av. Floresta, 654, Balneário Camboriú, SC',
+    precoHora: 'R$ 105,00',
   },
   {
     nome: 'Tênis Jardim Botânico',
@@ -105,6 +110,7 @@ export const estabelecimentos = [
     horarios: getDaysInMonth(currentMonth, currentYear),
     horarioFuncionamento: '9:00 - 21:00',
     endereco: 'Rua Botânico, 987, Rio de Janeiro, RJ',
+    precoHora: 'R$ 115,00',
   },
 ];
 

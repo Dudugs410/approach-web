@@ -46,6 +46,7 @@ const CourtCard = ({ court }) => {
         <p><b>Nome: </b>&nbsp;{court.nome}</p>
         <p><b>Horário de Funcionamento: </b>&nbsp;{court.horarioFuncionamento}</p>
         <p><b>Endereço: </b>&nbsp;{court.endereco}</p>
+        <p><b>Preço da Hora: </b>&nbsp;{court.precoHora}</p>
         <div className="card-select-container">
           {/* Date Picker */}
           <ReactDatePicker
