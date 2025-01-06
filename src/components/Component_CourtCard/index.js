@@ -1,20 +1,22 @@
 import React, { useContext, useState } from 'react';
 import './courtCard.scss';
 import { AuthContext } from '../../contexts/auth';
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const CourtCard = ({ court }) => {
-  const { schedule, updateUser } = useContext(AuthContext)
+  const { schedule, updateUser } = useContext(AuthContext);
 
-  const [selectedDate, setSelectedDate] = useState(''); // Track the selected date
-  const [selectedTime, setSelectedTime] = useState(''); // Track selected time slot
+  const [selectedDate, setSelectedDate] = useState(null); // Track the selected date
+  const [selectedTime, setSelectedTime] = useState(null); // Track selected time slot
 
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value); // Set the selected date
-    setSelectedTime(''); // Reset selected time when date changes
+  const handleDateChange = (date) => {
+    setSelectedDate(date); // Update the selected date
+    setSelectedTime(null); // Reset the selected time when date changes
   };
 
-  const handleHorarioChange = (e) => {
-    setSelectedTime(e.target.value); // Set the selected time
+  const handleHorarioChange = (time) => {
+    setSelectedTime(time); // Update the selected time
   };
 
   const handleSubmit = () => {
@@ -24,12 +26,16 @@ const CourtCard = ({ court }) => {
     }
 
     // Combine the date and time into a Date object
-    const dateTime = new Date(`${selectedDate}T${selectedTime}`);
+    const dateTime = new Date(
+      `${selectedDate.toISOString().split('T')[0]}T${selectedTime.toTimeString().split(' ')[0]}`
+    );
 
     // Call the schedule function with place and dateTime
     schedule(court, dateTime);
-    let user = JSON.parse(localStorage.getItem('currentUser'))
-    updateUser(user)
+
+    const user = JSON.parse(localStorage.getItem('currentUser'));
+    updateUser(user);
+
     alert('Agendamento realizado com sucesso!');
   };
 
@@ -41,32 +47,66 @@ const CourtCard = ({ court }) => {
         <p><b>Horário de Funcionamento: </b>&nbsp;{court.horarioFuncionamento}</p>
         <p><b>Endereço: </b>&nbsp;{court.endereco}</p>
         <div className="card-select-container">
-         {/* Date Picker */}
-         <input
-            type="date"
-            className="form-select date-time-controller"
-            aria-label="Dia select"
+          {/* Date Picker */}
+          <ReactDatePicker
+            portalId="root-portal"
+            selected={selectedDate}
             onChange={handleDateChange}
-            value={selectedDate}
-            style={{ flex: 1 }}
+            className="form-select"
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a date"
+             popperPlacement="bottom-start"
+            popperModifiers={[
+              {
+                name: 'preventOverflow',
+                options: {
+                  boundary: 'viewport', // Ensures the dropdown stays within the viewport
+                },
+              },
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 8], // Pushes the dropdown 8px below the input
+                },
+              },
+            ]}
           />
-
-          {/* Time Picker - Disabled until a date is selected */}
-          <input
-            type="time"
-            className="form-control date-time-controller"
-            aria-label="Horário select"
+          <ReactDatePicker
+            portalId="root-portal"
+            selected={selectedTime}
             onChange={handleHorarioChange}
-            value={selectedTime || ''}
+            className="form-control"
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="HH:mm"
             disabled={!selectedDate}
+            placeholderText="Select a time"
+            popperPlacement="bottom-start"
+            popperModifiers={[
+              {
+                name: 'preventOverflow',
+                options: {
+                  boundary: 'viewport', // Ensures the dropdown stays within the viewport
+                },
+              },
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 8], // Pushes the dropdown 8px below the input
+                },
+              },
+            ]}
           />
-          <div className='btn-container'>
-            <button 
-              className='btn btn-agendar date-time-controller' 
+          {/* Submit Button */}
+          <div className="btn-container">
+            <button
+              className="btn btn-agendar date-time-controller"
               disabled={!selectedTime || !selectedDate}
               onClick={handleSubmit}
-              >
-                Agendar
+            >
+              Agendar
             </button>
           </div>
         </div>
