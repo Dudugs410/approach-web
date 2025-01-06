@@ -5,7 +5,7 @@ import './schedulerTable.scss'
 // SchedulerTable.js
 const SchedulerTable = ({ array, deleteBooking }) => {
 	const [currentPage, setCurrentPage] = useState(1);
-	const [itemsPerPage] = useState(15);
+	const [itemsPerPage] = useState(10);
   
 	useEffect(() => {
 	  setCurrentPage(1); // Reset page to 1 when data changes
