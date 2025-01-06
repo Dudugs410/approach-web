@@ -87,9 +87,20 @@
     color: var(--primary-color);
 }
 
-.form-control{
-    text-align: center;
-    appearance: auto;
+.form-control {
+    text-align: center; /* Centers text */
+  }
+  
+.form-control:focus {
+    text-align: center; /* Keep the text centered when focused */
+    background-color: #f0f8ff; /* Optional: Change background color when focused */
+    color: #000; /* Optional: Change text color */
+    outline: none; /* Remove the default outline, optional */
+}
+
+.form-control::selection {
+    background-color: #3390FF; /* Background color for selected text */
+    color: white; /* Text color when selected */
 }
 
 .form-login:hover{

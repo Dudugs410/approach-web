@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react"
-import DatePicker from "react-datepicker"
-import "react-datepicker/dist/react-datepicker.css"
+import ReactDatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import { estabelecimentos } from "../../Mockups/quadras"
 
 import './courtfinder.scss'
 
-const CourtFinder = () => {
+const CourtFinder = ({quadras, setQuadrasDisplay}) => {
     const [bookings, setBookings] = useState([]);
     const [searchType, setSearchType] = useState('nome'); // Default search type
     const [searchQuery, setSearchQuery] = useState('');
@@ -12,6 +14,10 @@ const CourtFinder = () => {
     const [selectedTime, setSelectedTime] = useState(null);
     const [selectedLocal, setSelectedLocal] = useState('');
   
+    useEffect(() => {
+      console.log('estabelecimentos: ', estabelecimentos)
+    },[])
+
     const handleSearch = () => {
       if (!searchQuery && searchType !== 'disponibilidade') {
         alert("Você deve fornecer um termo de busca");
@@ -20,12 +26,12 @@ const CourtFinder = () => {
   
       let filteredResults = [];
       if (searchType === 'nome') {
-        filteredResults = bookings.filter((booking) =>
-          booking.local.toLowerCase().includes(searchQuery.toLowerCase())
+        filteredResults = estabelecimentos.filter((booking) =>
+          booking.nome.toLowerCase().includes(searchQuery.toLowerCase())
         );
       } else if (searchType === 'localidade') {
-        filteredResults = bookings.filter((booking) =>
-          booking.local.toLowerCase().includes(searchQuery.toLowerCase())
+        filteredResults = estabelecimentos.filter((booking) =>
+          booking.nome.toLowerCase().includes(searchQuery.toLowerCase())
         );
       } else if (searchType === 'disponibilidade') {
         if (!selectedDate || !selectedTime) {
@@ -39,22 +45,16 @@ const CourtFinder = () => {
           minute: '2-digit',
         });
   
-        filteredResults = bookings.filter(
+        filteredResults = estabelecimentos.filter(
           (booking) =>
             booking.date === selectedDateStr && booking.time === selectedTimeStr
         );
       }
   
       console.log('Filtered Results:', filteredResults);
+      setQuadrasDisplay(filteredResults)
       alert(`Resultados encontrados: ${filteredResults.length}`);
     };
-  
-    useEffect(() => {
-      const temp = JSON.parse(localStorage.getItem('bookings'));
-      if (temp) {
-        setBookings(temp);
-      }
-    }, []);
 
     useEffect(()=>{
       console.log('quadras? ', bookings)
@@ -127,19 +127,57 @@ const CourtFinder = () => {
   
         {searchType === 'disponibilidade' && (
           <div className="mb-3">
-            <label className="form-label">Data:</label>
-            <input
-              type="date"
-              className="form-control"
-              onChange={(e) => setSelectedDate(new Date(e.target.value))}
-            />
-  
-            <label className="form-label mt-2">Horário:</label>
-            <input
-              type="time"
-              className="form-control"
-              onChange={(e) => setSelectedTime(e.target.valueAsDate)}
-            />
+          <ReactDatePicker
+            portalId="root-portal"
+            selected={selectedDate}
+            onChange={handleDateChange}
+            className="form-select"
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a date"
+             popperPlacement="bottom-start"
+            popperModifiers={[
+              {
+                name: 'preventOverflow',
+                options: {
+                  boundary: 'viewport', // Ensures the dropdown stays within the viewport
+                },
+              },
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 8], // Pushes the dropdown 8px below the input
+                },
+              },
+            ]}
+          />
+          <ReactDatePicker
+            portalId="root-portal"
+            selected={selectedTime}
+            onChange={handleHorarioChange}
+            className="form-control"
+            showTimeSelect
+            showTimeSelectOnly
+            timeIntervals={15}
+            timeCaption="Time"
+            dateFormat="HH:mm"
+            disabled={!selectedDate}
+            placeholderText="Select a time"
+            popperPlacement="bottom-start"
+            popperModifiers={[
+              {
+                name: 'preventOverflow',
+                options: {
+                  boundary: 'viewport', // Ensures the dropdown stays within the viewport
+                },
+              },
+              {
+                name: 'offset',
+                options: {
+                  offset: [0, 8], // Pushes the dropdown 8px below the input
+                },
+              },
+            ]}
+          />
           </div>
         )}
   
