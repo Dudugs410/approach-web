@@ -11,12 +11,16 @@ import './quadras.scss'
 
 const EncontreQuadras = () => {
 
+    const quadrasExistentes = estabelecimentos
+
+    const [quadrasDisplay, setQuadrasDisplay] = useState(estabelecimentos)
+
     return (
         <div className="container mt-5 container-quadras">
             <GoBack route='/dashboard' />
-            <CourtFinder />
-            {estabelecimentos.map((court) => (
-                <CourtCard key={court.id} court={court} />
+            <CourtFinder setQuadrasDisplay={setQuadrasDisplay} />
+            {quadrasDisplay.map((court) => (
+              <CourtCard key={court.id} court={court} />
             ))}
         </div>
     );
