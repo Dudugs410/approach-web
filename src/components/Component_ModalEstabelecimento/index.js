@@ -18,7 +18,8 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
         estabelecimento.quadras.forEach(quadra => {
             let temp = {
                 label: quadra.id,
-                value: quadra.id
+                value: quadra.id,
+                agendamentos: quadra.agendamentos,
             }
             arrayTemp.push(temp)
         });
