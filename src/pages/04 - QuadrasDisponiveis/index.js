@@ -18,9 +18,12 @@ const EncontreQuadras = () => {
     return (
         <div className="container mt-5 container-quadras">
             <GoBack route='/dashboard' />
-            <CourtFinder setQuadrasDisplay={setQuadrasDisplay} />
+            <hr className='hr-global'/>
+            <h1 className='title-global'>Quadras</h1>
+            <hr className='hr-global'/>
+            {/*<CourtFinder setQuadrasDisplay={setQuadrasDisplay} />*/}
             {quadrasDisplay.map((court) => (
-              <CourtCard key={court.id} court={court} />
+              <CourtCard key={court.id} court={court}/>
             ))}
         </div>
     );

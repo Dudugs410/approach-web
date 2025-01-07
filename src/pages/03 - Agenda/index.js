@@ -9,6 +9,9 @@ const Agenda = () => {
     return (
         <div className="container mt-5 container-quadras">
             <GoBack route='/dashboard'/>
+            <hr className='hr-global'/>
+            <h1 className='title-global'>Suas Reservas</h1>
+            <hr className='hr-global'/>
             <Scheduler/>
         </div>
     );

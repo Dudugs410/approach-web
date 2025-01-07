@@ -1,0 +1,54 @@
+
+.container-estabelecimento{
+    position: fixed;
+    margin: 0 !important;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.container-modal-estabelecimento-content {
+    position: relative; /* Ensure it respects the z-index stacking context */
+    z-index: 2; /* Higher z-index to appear above the background */
+    border: solid white 1px;
+    border-radius: 5px;
+    margin: 6%;
+    background-color: var(--background-color);
+}
+
+.modal-background {
+    position: fixed; /* Fixed ensures it covers the entire viewport */
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1; /* Lower z-index so it stays behind the content */
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+
+.title-modal-estabelecimento{
+
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    
+    & > img {
+        height: 100px;
+        width: 100px;
+    }
+}
+
+.modal-estabelecimento-select-container{
+    display: inline-flex;
+    width: 100%;
+    gap: 10px;
+    justify-content: space-evenly;
+    &.select-container{
+
+    }
+}
