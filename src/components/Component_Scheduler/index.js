@@ -60,7 +60,6 @@ const Scheduler = () => {
   return (
     <div className="scheduler">
       <div className="booking-list">
-        <h2>Suas Reservas:</h2>
         {bookings.length > 0 ? (
           <SchedulerTable array={bookings} deleteBooking={deleteBooking} />
         ) : (
