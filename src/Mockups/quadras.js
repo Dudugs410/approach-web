@@ -21,7 +21,7 @@ export const estabelecimentos = [
         agendamentos: [
           {
             nomeAtleta: 'Teste Atleta',
-            data: '21/12/2024',
+            data: '16/01/2025',
             hora: '10:00',
           },
         ],
@@ -39,7 +39,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Rua dos Remadores, 123, Porto Alegre, RS',
     precoHora: 'R$ 90,00',
   },
@@ -68,7 +71,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Av. das Areias, 456, Florianópolis, SC',
     precoHora: 'R$ 100,00',
   },
@@ -97,7 +103,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Rua dos Tenistas, 789, Curitiba, PR',
     precoHora: 'R$ 70,00',
   },
@@ -126,7 +135,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Rua Figueira, 321, Porto Alegre, RS',
     precoHora: 'R$ 95,00',
   },
@@ -155,7 +167,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Av. Floresta, 654, Balneário Camboriú, SC',
     precoHora: 'R$ 105,00',
   },
@@ -184,7 +199,10 @@ export const estabelecimentos = [
         agendamentos: [],
       }
     ],
-    horarioFuncionamento: '9:00 - 21:00',
+    horarioFuncionamento: {
+      inicio: '9:00',
+      fim: '21:00',
+    },
     endereco: 'Rua Botânico, 987, Rio de Janeiro, RJ',
     precoHora: 'R$ 115,00',
   },

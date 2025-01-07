@@ -52,3 +52,41 @@
 
     }
 }
+
+.selected-quadra-content{
+    display: flex;
+    //border: solid white 1px;
+    justify-content: space-evenly;
+
+    p{
+        margin: 0;
+        padding: 1em;
+        padding-top: 0;
+        color: var(--primary-color);
+    }
+
+    &.content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+
+    }
+
+    h2{
+        color: var(--primary-color);
+        text-align: center;
+    }
+}
+
+.time-slot {
+    margin: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}
+
+.time-slot.disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
