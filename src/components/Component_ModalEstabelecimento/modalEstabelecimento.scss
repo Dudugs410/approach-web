@@ -7,6 +7,7 @@
     height: 100%;
     width: 100%;
     z-index: 2;
+    overflow-y: overlay;
 }
 
 .container-modal-estabelecimento-content {
@@ -53,6 +54,10 @@
     }
 }
 
+.selected-quadra-container{
+    margin: 2%;
+}
+
 .selected-quadra-content{
     display: flex;
     //border: solid white 1px;
@@ -73,7 +78,7 @@
 
     }
 
-    h2{
+    h5{
         color: var(--primary-color);
         text-align: center;
     }
