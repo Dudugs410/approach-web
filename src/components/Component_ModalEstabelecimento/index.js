@@ -1,45 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
-import { Scheduler } from '@aldabil/react-scheduler';
+import DatePicker from 'react-date-picker';
+import 'react-date-picker/dist/DatePicker.css';
+import 'react-calendar/dist/Calendar.css';
 import './modalEstabelecimento.scss';
 
-// Mockup Data (fallback if local storage is empty)
-const mockData = {
-    estabelecimento: {
-        id: 1,
-        nome: 'Complexo Esportivo',
-        foto: 'complexo.jpg',
-        quadras: [
-            {
-                id: 'quadra-1',
-                descricao: 'Quadra 1',
-                agendamentos: [
-                    { data: '08/01/2025', hora: '10:00', usuario: 'John Doe' },
-                    { data: '08/01/2025', hora: '15:00', usuario: 'Jane Doe' },
-                ],
-            },
-            {
-                id: 'quadra-2',
-                descricao: 'Quadra 2',
-                agendamentos: [],
-            },
-        ],
-    },
-};
-
-const ModalEstabelecimento = ({ onClose }) => {
+const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
     const [selectedQuadra, setSelectedQuadra] = useState(null);
     const [quadrasOptions, setQuadrasOptions] = useState([]);
-    const [events, setEvents] = useState([]);
-    const [estabelecimento, setEstabelecimento] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     useEffect(() => {
-        const storedData = JSON.parse(localStorage.getItem('estabelecimento')) || mockData.estabelecimento;
-        setEstabelecimento(storedData);
-
-        const options = storedData.quadras.map((quadra) => ({
-            label: quadra.descricao,
+        console.log('estabelecimento: ', estabelecimento)
+        const options = estabelecimento.quadras.map((quadra) => ({
+            label: quadra.id,
             value: quadra.id,
+            id: quadra.id,
+            descricao: quadra.descricao,
+            precoHora: quadra.precoHora,
             agendamentos: quadra.agendamentos,
         }));
         setQuadrasOptions(options);
@@ -47,66 +25,19 @@ const ModalEstabelecimento = ({ onClose }) => {
 
     const handleSelectedQuadra = (selected) => {
         setSelectedQuadra(selected);
-        if (selected) {
-            generateAvailableSlots(selected.agendamentos);
+    };
+
+    //checar horários indisponíveis
+
+    const checkUnavailable = () => {
+
+    }
+
+    useEffect(()=>{
+        if(selectedQuadra){
+            console.log('Quadra Selecionada: ', selectedQuadra)
         }
-    };
-
-    const generateAvailableSlots = (bookedSlots) => {
-        const startTime = 9; // Start of working hours (9 AM)
-        const endTime = 21; // End of working hours (9 PM)
-        const today = new Date();
-
-        const slots = [];
-        for (let hour = startTime; hour < endTime; hour++) {
-            const timeSlot = new Date(today.getFullYear(), today.getMonth(), today.getDate(), hour, 0);
-            const timeSlotString = timeSlot.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-            const isBooked = bookedSlots.some(
-                (booking) =>
-                    booking.data === timeSlot.toLocaleDateString('pt-BR') &&
-                    booking.hora === timeSlotString
-            );
-
-            if (!isBooked) {
-                slots.push({
-                    title: 'Disponível',
-                    start: timeSlot,
-                    end: new Date(timeSlot.getTime() + 60 * 60 * 1000), // 1-hour slot
-                });
-            }
-        }
-
-        setEvents(slots);
-    };
-
-    const handleEventAdd = (event) => {
-        const userData = JSON.parse(localStorage.getItem('usuario')) || { usuario: 'Guest' };
-        const { usuario } = userData;
-
-        // Format the booking data
-        const data = event.start.toLocaleDateString('pt-BR'); // e.g., DD/MM/YYYY
-        const hora = event.start.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
-        // Add the booking
-        const updatedQuadras = estabelecimento.quadras.map((quadra) => {
-            if (quadra.id === selectedQuadra.value) {
-                return {
-                    ...quadra,
-                    agendamentos: [...quadra.agendamentos, { data, hora, usuario }],
-                };
-            }
-            return quadra;
-        });
-
-        const updatedEstabelecimento = { ...estabelecimento, quadras: updatedQuadras };
-        setEstabelecimento(updatedEstabelecimento);
-        localStorage.setItem('estabelecimento', JSON.stringify(updatedEstabelecimento));
-
-        // Refresh available slots
-        generateAvailableSlots(updatedQuadras.find((quadra) => quadra.id === selectedQuadra.value).agendamentos);
-        return event;
-    };
+    },[selectedQuadra])
 
     return (
         <div className="container-estabelecimento">
@@ -125,21 +56,31 @@ const ModalEstabelecimento = ({ onClose }) => {
                         onChange={handleSelectedQuadra}
                         options={quadrasOptions}
                     />
+                    <DatePicker
+                        onChange={setSelectedDate}
+                        value={selectedDate}
+                        calendarClassName="custom-calendar" // Optional: Add custom styles
+                        clearIcon={null} // Removes the clear button
+                        format="dd-mm-yyyy" // Example date format
+                    />
                 </div>
                 <hr className="hr-global" />
                 <div className="selected-quadra-container">
                     {selectedQuadra ? (
-                        <Scheduler
-                            events={events}
-                            view="day"
-                            onEventAdd={handleEventAdd}
-                            editable={false} // Prevent editing
-                            deletable={false} // Prevent deleting
-                            disableEventCreation={false} // Allow adding new bookings
-                        />
+                        <div className='container-quadra'>
+                            <div className='selected-quadra-content'>
+                                <p><b>Quadra: </b>{selectedQuadra.id}</p>
+                                <p><b>Descrição: </b>{selectedQuadra.descricao}</p>
+                                <p><b>Preço/hora: </b>{selectedQuadra.precoHora}</p>
+                            </div>
+                            <div className='selected-quadra-content'>
+                                <p><b>Horários Disponíveis: </b></p>
+                                <p>teste</p>
+                            </div>
+                        </div>
                     ) : (
                         <div className="selected-quadra-content">
-                            <p>Selecione uma quadra para exibir os horários disponíveis</p>
+                            <p style={{'textAlign': 'center'}}>Selecione uma quadra para exibir os horários disponíveis</p>
                         </div>
                     )}
                 </div>
