@@ -71,6 +71,8 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
             nomeAtleta: user.usuario,
             data: selectedDate.toLocaleDateString('pt-BR'), // format: dd/mm/yyyy
             hora: horario.time,
+            local: estabelecimento.nome,
+            quadra: selectedQuadra.label,
         };
     
         // Retrieve the estabelecimentos array from localStorage
@@ -97,11 +99,13 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
     
             // Add the new agendamento to the quadra's agendamentos array
             quadra.agendamentos.push(agendamento);
+            user.agendamentos.push(agendamento)
     
             console.log('Updated quadra agendamentos:', quadra.agendamentos);
     
             // Save the updated estabelecimentos array back to localStorage
             localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos));
+            localStorage.setItem('currentUser', JSON.stringify(user))
         } else {
             console.error('Quadra not found with id:', selectedQuadra.label);
         }
