@@ -6,8 +6,8 @@ import TFT from '../assets/mockups/logo_tresfigueiras_tenis_clube.png';
 import OBF from '../assets/mockups/openbeachfloresta.png';
 import TJB from '../assets/mockups/TenisJdBotanico.png';
 
-// Define an array of establishments with detailed properties
-export const estabelecimentos = [
+// Define the default data for establishments
+const defaultEstabelecimentos = [
   {
     nome: 'Grêmio Náutico União',
     sigla: 'GNU',
@@ -190,3 +190,18 @@ export const estabelecimentos = [
   },
 ];
 
+// Check localStorage and set `estabelecimentos`
+export const estabelecimentos = (() => {
+  const storedData = localStorage.getItem('estabelecimentos');
+  if (storedData) {
+    try {
+      return JSON.parse(storedData);
+    } catch (error) {
+      console.error('Failed to parse stored data:', error);
+    }
+  }
+
+  // Store default data in localStorage if not present
+  localStorage.setItem('estabelecimentos', JSON.stringify(defaultEstabelecimentos));
+  return defaultEstabelecimentos;
+})();
