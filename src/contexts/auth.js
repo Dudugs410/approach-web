@@ -2,6 +2,7 @@
 /* eslint-disable default-case */
 import React, { createContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { estabelecimentos } from '../Mockups/quadras'
 
 export const AuthContext = createContext({})
 
@@ -56,6 +57,7 @@ function AuthProvider({ children }){
 				// Set login state and navigate
 				localStorage.setItem('isLoggedIn', true);
 				localStorage.setItem('currentPath', '/dashboard');
+				localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos))
 	
 				setIsLoggedIn(true);
 				navigate('/dashboard');

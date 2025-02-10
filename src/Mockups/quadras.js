@@ -6,8 +6,8 @@ import TFT from '../assets/mockups/logo_tresfigueiras_tenis_clube.png';
 import OBF from '../assets/mockups/openbeachfloresta.png';
 import TJB from '../assets/mockups/TenisJdBotanico.png';
 
-// Define an array of establishments with detailed properties
-export const estabelecimentos = [
+// Define the default data for establishments
+const defaultEstabelecimentos = [
   {
     nome: 'Grêmio Náutico União',
     sigla: 'GNU',
@@ -18,7 +18,7 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 90,00',
-        agendamentosMarcados: [
+        agendamentos: [
           {
             nomeAtleta: 'Teste Atleta',
             data: '21/12/2024',
@@ -30,13 +30,13 @@ export const estabelecimentos = [
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 90,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 90,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -53,19 +53,19 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 100,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 100,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 100,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -82,19 +82,19 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 70,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 70,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 70,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -111,19 +111,19 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 95,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 95,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 95,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -140,19 +140,19 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 105,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 105,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 105,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -169,19 +169,19 @@ export const estabelecimentos = [
         id: 'quadra01',
         descricao: 'interna',
         precoHora: 'R$ 115,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra02',
         descricao: 'externa',
         precoHora: 'R$ 115,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       },
       {
         id: 'quadra03',
         descricao: 'externa',
         precoHora: 'R$ 115,00',
-        agendamentosMarcados: [],
+        agendamentos: [],
       }
     ],
     horarioFuncionamento: '9:00 - 21:00',
@@ -190,3 +190,18 @@ export const estabelecimentos = [
   },
 ];
 
+// Check localStorage and set `estabelecimentos`
+export const estabelecimentos = (() => {
+  const storedData = localStorage.getItem('estabelecimentos');
+  if (storedData) {
+    try {
+      return JSON.parse(storedData);
+    } catch (error) {
+      console.error('Failed to parse stored data:', error);
+    }
+  }
+
+  // Store default data in localStorage if not present
+  localStorage.setItem('estabelecimentos', JSON.stringify(defaultEstabelecimentos));
+  return defaultEstabelecimentos;
+})();

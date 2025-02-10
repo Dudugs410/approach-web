@@ -7,6 +7,7 @@
     height: 100%;
     width: 100%;
     z-index: 2;
+    overflow-y: overlay;
 }
 
 .container-modal-estabelecimento-content {
@@ -44,11 +45,148 @@
 }
 
 .modal-estabelecimento-select-container{
-    display: inline-flex;
-    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 10px;
-    justify-content: space-evenly;
-    &.select-container{
+    justify-content: center;
+    align-items: start;
+    justify-items: start;
+    margin-left: 75px;
+}
 
+.select{
+    min-width: 200px;
+}
+
+/* Styles for both Select and DatePicker */
+.select,
+.datepicker {
+    width: 200px;
+    height: 38px;
+    //padding: 8px 12px;
+    //border: 1px solid #ccc;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+    box-shadow: none;
+    outline: none;
+    background-color: white;
+    
+}
+
+/* Additional styles for DatePicker input to align with Select */
+.datepicker input {
+    height:38px;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.5;
+    
+}
+
+/* Customize the calendar appearance */
+.custom-calendar {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* Optional: Add hover and focus states for consistency */
+.select:hover, 
+.datepicker:hover {
+    border-color: #888;
+}
+
+.select:focus, 
+.datepicker input:focus {
+    border-color: #555;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.react-date-picker__wrapper{
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 0;
+    border: thin solid gray;
+    height: 38px;
+    border-radius: 5px;
+}
+
+.css-1dimb5e-singleValue{
+    color: black !important;
+}
+
+.css-13cymwt-control {
+    background-color: white !important;
+}
+
+.selected-quadra-container{
+    .container{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+}
+
+.selected-quadra-content{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    p{
+        margin: 0;
+        padding-bottom: 1em;
+        padding-top: 0;
+        color: var(--primary-color);
+    }
+
+    &.content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        
+
+    }
+
+    h5{
+        color: var(--primary-color);
+        text-align: center;
+    }
+}
+
+.container-quadra{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    justify-content: center;
+    align-items: start;
+    justify-items: start;
+    margin-left: 75px;
+}
+
+.time-slot-container{
+    display: flex;
+    flex-direction: column;
+    //border: solid gray 1px;
+    gap: 10px;
+    &>*{
+        color: var(--primary-color)
+    }
+
+    &>.time-slot{
+        display: inline-flex;
+        justify-content: space-between;
+    }
+}
+
+.btn-reservar{
+    color: var(--primary-color);
+    border: solid white 1px;
+
+    &:hover{
+        background-color: var(--primary-color);
+        color: var(--background-color);
+        border: solid var(--primary-color) 1px;
     }
 }

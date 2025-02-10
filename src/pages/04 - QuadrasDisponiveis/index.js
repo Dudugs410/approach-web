@@ -11,8 +11,6 @@ import './quadras.scss'
 
 const EncontreQuadras = () => {
 
-    const quadrasExistentes = estabelecimentos
-
     const [quadrasDisplay, setQuadrasDisplay] = useState(estabelecimentos)
 
     return (
@@ -21,9 +19,8 @@ const EncontreQuadras = () => {
             <hr className='hr-global'/>
             <h1 className='title-global'>Quadras</h1>
             <hr className='hr-global'/>
-            {/*<CourtFinder setQuadrasDisplay={setQuadrasDisplay} />*/}
-            {quadrasDisplay.map((court) => (
-              <CourtCard key={court.id} court={court}/>
+            {quadrasDisplay.map((court, index) => (
+              <CourtCard key={index} court={court}/>
             ))}
         </div>
     );

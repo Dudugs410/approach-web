@@ -36,6 +36,7 @@ const SchedulerTable = ({ array, deleteBooking }) => {
                 <th className="det-th-global" scope="col">Data</th>
                 <th className="det-th-global" scope="col">Horário</th>
                 <th className="det-th-global" scope="col">Local</th>
+                <th className="det-th-global" scope="col">Quadra</th>
                 <th className="det-th-global" scope="col">Ações</th>
               </tr>
             </thead>
@@ -46,6 +47,7 @@ const SchedulerTable = ({ array, deleteBooking }) => {
                     <td className="det-td-vendas-global" data-label="Data">{item.data}</td>
                     <td className="det-td-vendas-global" data-label="Horário">{item.hora}</td>
                     <td className="det-td-vendas-global" data-label="Local">{item.local}</td>
+                    <td className="det-td-vendas-global" data-label="Quadra">{item.quadra}</td>
                     <td className="det-td-vendas-global" data-label="Ação">
                       <button
                         className="btn btn-outline-danger btn-sm"
