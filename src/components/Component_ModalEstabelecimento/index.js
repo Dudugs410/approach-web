@@ -13,7 +13,7 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
 
     useEffect(()=>{
         console.log('estabelecimento: ', estabelecimento)
-      },[])
+    },[])
 
     // Generate time slots based on horarioFuncionamento
     const generateTimeSlots = (horarioFuncionamento, agendamentos) => {
@@ -61,7 +61,6 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
         }
     }, [selectedQuadra, selectedDate]);
 
-    
     const handleReserva = (horario) => {
         console.log('handleReserva');
         console.log('horario a reservar: ', horario, selectedDate.toLocaleDateString('pt-BR'));
@@ -80,15 +79,15 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
     
         if (!estabelecimentos) {
             console.error("No estabelecimentos found in localStorage");
-            return;
+            return
         }
     
         // Find the estabelecimento with the matching sigla
-        const estabelecimentoTemp= estabelecimentos.find(e => e.sigla === estabelecimento.sigla);
+        const estabelecimentoTemp = estabelecimentos.find(e => e.sigla === estabelecimento.sigla);
     
         if (!estabelecimentoTemp) {
-            console.error("Estabelecimento not found");
-            return;
+            console.error("Estabelecimento not found")
+            return
         }
     
         // Find the quadra with the matching id within the estabelecimento
@@ -106,6 +105,24 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
             // Save the updated estabelecimentos array back to localStorage
             localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos));
             localStorage.setItem('currentUser', JSON.stringify(user))
+
+            // Retrieve the localUsers array from localStorage
+            const localUsers = JSON.parse(localStorage.getItem('localUsers')) || [];
+
+            // Find the index of the user in the array that matches the temporary user object
+            const userIndex = localUsers.findIndex(u => u.usuario === user.usuario);
+
+            // If the user is found, replace the existing user object with the temporary user object
+            if (userIndex !== -1) {
+                localUsers[userIndex] = user;
+            } else {
+                // If the user is not found, you can choose to add the new user to the array
+                localUsers.push(user);
+            }
+
+            // Update the localUsers array in localStorage
+            localStorage.setItem('localUsers', JSON.stringify(localUsers));
+
         } else {
             console.error('Quadra not found with id:', selectedQuadra.label);
         }

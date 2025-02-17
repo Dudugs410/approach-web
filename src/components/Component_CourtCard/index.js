@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import './courtCard.scss';
-import { AuthContext } from '../../contexts/auth';
-import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ModalEstabelecimento from '../Component_ModalEstabelecimento';
 
