@@ -16,7 +16,7 @@ function AuthProvider({ children }){
 	const login = async (user, pw) => {
 		try {
 			const log = async () => {
-				if (user !== 'cliente' || user === 'cliente') {
+				if (user !== 'cliente') {
 					// Set user type and initialize currentUser
 					const userType = user !== 'cliente' ? 'atleta' : 'cliente';
 					setUserType(userType);
@@ -49,6 +49,8 @@ function AuthProvider({ children }){
 					localStorage.setItem('currentUser', JSON.stringify(currentUser));
 	
 					console.log(`Logged in as ${userType}`);
+				} else if (user === 'cliente'){
+
 				} else {
 					console.log('Invalid user type. Please use "atleta" or "cliente".');
 					return;

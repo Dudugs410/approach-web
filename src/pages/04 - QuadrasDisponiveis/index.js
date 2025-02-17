@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import CourtFinder from '../../components/Component_CourtFinder';
 import GoBack from '../../components/Component_GoBack';
 
 import { estabelecimentos } from '../../Mockups/quadras';

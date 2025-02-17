@@ -61,7 +61,7 @@ const Dashboard = () => {
 				<ImageCarousel images={images} interval={7000} />
 				{ userType === 'atleta' ? 
 					<div className='dashboard-card-container'>
-						<Card title={'Agendamentos'} p={'Visualize seus agendamentos'} image={agendamento} onClick={()=>{navigate('/agenda')}}/>
+						<Card title={'Agendamentos'} p={'Visualize suas Reservas'} image={agendamento} onClick={()=>{navigate('/agenda')}}/>
 						<Card title={'Quadras'} p={'Encontre quadras disponíveis'} image={quadras} onClick={()=>{navigate('/encontrequadras')}}/>
 					</div>
 					:
