@@ -38,6 +38,7 @@ const Scheduler = () => {
   const deleteBooking = (index) => {
     const temp = JSON.parse(localStorage.getItem("currentUser"))
     const updatedBookings = temp.agendamentos.filter((_, i) => i !== index)
+    const deletedBooking = temp.agendamentos[index]
     temp.agendamentos = updatedBookings
     localStorage.setItem('currentUser', JSON.stringify(temp))
     const localUsers = JSON.parse(localStorage.getItem('localUsers')) || []
@@ -45,6 +46,36 @@ const Scheduler = () => {
     if (userIndex !== -1) {
         localUsers[userIndex].agendamentos = updatedBookings
         localStorage.setItem('localUsers', JSON.stringify(localUsers))
+    }
+    const estabelecimentos = JSON.parse(localStorage.getItem('estabelecimentos')) || []
+    const estabelecimentoIndex = estabelecimentos.findIndex(
+        (estabelecimento) => estabelecimento.nome === deletedBooking.local
+    )
+
+    if (estabelecimentoIndex !== -1) {
+        // Find the quadra that matches the deleted booking's quadra
+        const quadraIndex = estabelecimentos[estabelecimentoIndex].quadras.findIndex(
+            (quadra) => quadra.id === deletedBooking.quadra
+        )
+
+        if (quadraIndex !== -1) {
+            // Filter out the deleted booking from the quadra's agendamentos
+            const updatedQuadraAgendamentos = estabelecimentos[estabelecimentoIndex].quadras[
+                quadraIndex
+            ].agendamentos.filter(
+                (agendamento) =>
+                    agendamento.data !== deletedBooking.data ||
+                    agendamento.hora !== deletedBooking.hora ||
+                    agendamento.nomeAtleta !== deletedBooking.nomeAtleta
+            )
+            estabelecimentos[estabelecimentoIndex].quadras[quadraIndex].agendamentos =
+                updatedQuadraAgendamentos
+            localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos))
+        } else {
+            console.error('Quadra not found with id:', deletedBooking.quadra)
+        }
+    } else {
+        console.error('Estabelecimento not found with nome:', deletedBooking.local)
     }
     setBookings(updatedBookings)
 }

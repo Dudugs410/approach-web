@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
-import DatePicker from 'react-date-picker';
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import './modalEstabelecimento.scss';
+import React, { useEffect, useState } from 'react'
+import Select from 'react-select'
+import DatePicker from 'react-date-picker'
+import 'react-date-picker/dist/DatePicker.css'
+import 'react-calendar/dist/Calendar.css'
+import './modalEstabelecimento.scss'
 
 const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
-    const [selectedQuadra, setSelectedQuadra] = useState(null);
-    const [quadrasOptions, setQuadrasOptions] = useState([]);
-    const [selectedDate, setSelectedDate] = useState(new Date());
-    const [timeSlots, setTimeSlots] = useState([]);
+    const [selectedQuadra, setSelectedQuadra] = useState(null)
+    const [quadrasOptions, setQuadrasOptions] = useState([])
+    const [selectedDate, setSelectedDate] = useState(new Date())
+    const [timeSlots, setTimeSlots] = useState([])
 
     useEffect(()=>{
         console.log('estabelecimento: ', estabelecimento)
@@ -17,21 +17,21 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
 
     // Generate time slots based on horarioFuncionamento
     const generateTimeSlots = (horarioFuncionamento, agendamentos) => {
-        const [start, end] = horarioFuncionamento.split(' - ');
-        const startHour = parseInt(start.split(':')[0]);
-        const endHour = parseInt(end.split(':')[0]);
+        const [start, end] = horarioFuncionamento.split(' - ')
+        const startHour = parseInt(start.split(':')[0])
+        const endHour = parseInt(end.split(':')[0])
 
-        const slots = [];
+        const slots = []
         for (let hour = startHour; hour < endHour; hour++) {
-            const time = `${hour}:00`;
+            const time = `${hour}:00`
             const isBooked = agendamentos.some(
                 (agendamento) =>
                     agendamento.data === selectedDate.toLocaleDateString('pt-BR') &&
                     agendamento.hora === time
             );
-            slots.push({ time, isBooked });
+            slots.push({ time, isBooked })
         }
-        return slots;
+        return slots
     };
 
     useEffect(() => {
@@ -44,46 +44,50 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
             agendamentos: quadra.agendamentos,
             horarioFuncionamento: estabelecimento.horarioFuncionamento,
         }));
-        setQuadrasOptions(options);
-    }, [estabelecimento]);
+        setQuadrasOptions(options)
+    }, [estabelecimento])
 
     const handleSelectedQuadra = (selected) => {
-        setSelectedQuadra(selected);
-    };
+        setSelectedQuadra(selected)
+        const slots = generateTimeSlots(
+            selectedQuadra.horarioFuncionamento,
+            selectedQuadra.agendamentos
+        )
+        setTimeSlots(slots)
+    }
 
     useEffect(() => {
         if (selectedQuadra) {
             const slots = generateTimeSlots(
                 selectedQuadra.horarioFuncionamento,
                 selectedQuadra.agendamentos
-            );
-            setTimeSlots(slots);
+            )
+            setTimeSlots(slots)
         }
-    }, [selectedQuadra, selectedDate]);
+    }, [selectedQuadra, selectedDate])
 
     const handleReserva = (horario) => {
-        console.log('handleReserva');
-        console.log('horario a reservar: ', horario, selectedDate.toLocaleDateString('pt-BR'));
-    
-        const user = JSON.parse(localStorage.getItem('currentUser'));
+        console.log('handleReserva')
+        console.log('horario a reservar: ', horario, selectedDate.toLocaleDateString('pt-BR'))
+        const user = JSON.parse(localStorage.getItem('currentUser'))
         const agendamento = {
             nomeAtleta: user.usuario,
             data: selectedDate.toLocaleDateString('pt-BR'), // format: dd/mm/yyyy
             hora: horario.time,
             local: estabelecimento.nome,
             quadra: selectedQuadra.label,
-        };
+        }
     
         // Retrieve the estabelecimentos array from localStorage
-        const estabelecimentos = JSON.parse(localStorage.getItem('estabelecimentos'));
+        const estabelecimentos = JSON.parse(localStorage.getItem('estabelecimentos'))
     
         if (!estabelecimentos) {
-            console.error("No estabelecimentos found in localStorage");
+            console.error("No estabelecimentos found in localStorage")
             return
         }
     
         // Find the estabelecimento with the matching sigla
-        const estabelecimentoTemp = estabelecimentos.find(e => e.sigla === estabelecimento.sigla);
+        const estabelecimentoTemp = estabelecimentos.find(e => e.sigla === estabelecimento.sigla)
     
         if (!estabelecimentoTemp) {
             console.error("Estabelecimento not found")
@@ -91,42 +95,48 @@ const ModalEstabelecimento = ({ estabelecimento, onClose }) => {
         }
     
         // Find the quadra with the matching id within the estabelecimento
-        const quadra = estabelecimento.quadras.find(q => q.id === selectedQuadra.label);
+        const quadra = estabelecimentoTemp.quadras.find(q => q.id === selectedQuadra.label)
     
         if (quadra) {
-            console.log('Found quadra:', quadra);
+            console.log('Found quadra:', quadra)
     
             // Add the new agendamento to the quadra's agendamentos array
-            quadra.agendamentos.push(agendamento);
+            quadra.agendamentos.push(agendamento)
             user.agendamentos.push(agendamento)
     
-            console.log('Updated quadra agendamentos:', quadra.agendamentos);
+            console.log('Updated quadra agendamentos:', quadra.agendamentos)
     
             // Save the updated estabelecimentos array back to localStorage
-            localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos));
+            localStorage.setItem('estabelecimentos', JSON.stringify(estabelecimentos))
             localStorage.setItem('currentUser', JSON.stringify(user))
-
+    
             // Retrieve the localUsers array from localStorage
-            const localUsers = JSON.parse(localStorage.getItem('localUsers')) || [];
-
+            const localUsers = JSON.parse(localStorage.getItem('localUsers')) || []
+    
             // Find the index of the user in the array that matches the temporary user object
-            const userIndex = localUsers.findIndex(u => u.usuario === user.usuario);
-
+            const userIndex = localUsers.findIndex(u => u.usuario === user.usuario)
+    
             // If the user is found, replace the existing user object with the temporary user object
             if (userIndex !== -1) {
-                localUsers[userIndex] = user;
+                localUsers[userIndex] = user
             } else {
                 // If the user is not found, you can choose to add the new user to the array
-                localUsers.push(user);
+                localUsers.push(user)
             }
-
+    
             // Update the localUsers array in localStorage
-            localStorage.setItem('localUsers', JSON.stringify(localUsers));
-
+            localStorage.setItem('localUsers', JSON.stringify(localUsers))
+    
+            // Update the time slots after the reservation is made
+            const updatedSlots = generateTimeSlots(
+                selectedQuadra.horarioFuncionamento,
+                quadra.agendamentos
+            );
+            setTimeSlots(updatedSlots)
         } else {
-            console.error('Quadra not found with id:', selectedQuadra.label);
+            console.error('Quadra not found with id:', selectedQuadra.label)
         }
-    };    
+    }   
 
     return (
         <div className="container-estabelecimento">
